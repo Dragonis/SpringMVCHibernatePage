@@ -1,41 +1,16 @@
-import model.worldCountryEntity;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
 import org.hibernate.Query;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.Session;
+import pojo.worldCountryEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Dragonis on 16.08.2015.
  */
 public class Main {
-    private static final SessionFactory ourSessionFactory;
-    private static final ServiceRegistry serviceRegistry;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
-            ourSessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
+        final Session session = HibernateUtil.getSession();
         try {
             System.out.println("querying all the managed entities...");
 //            final Map metadataMap = session.getSessionFactory().getAllClassMetadata();
@@ -52,8 +27,8 @@ public class Main {
 //            }
             final Query query1 = session.createQuery("from worldCountryEntity ");
             List list1 = query1.list();
-            for (int i=0; i<list1.size(); i++) {
-                worldCountryEntity world = (worldCountryEntity) list1.get(i);
+            for (Object aList1 : list1) {
+                worldCountryEntity world = (worldCountryEntity) aList1;
                 System.out.println(world.getName());
             }
 //            session.save(new worldCountryEntity().setName("WojtekS"););

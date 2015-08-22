@@ -9,9 +9,9 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.username">root</property>
         <property name="connection.password">root</property>
-        <mapping class="model.worldCityEntity"/>
-        <mapping class="model.worldCountryEntity"/>
-        <mapping class="model.worldCountrylanguageEntity"/>
+        <mapping class="pojo.worldCityEntity"/>
+        <mapping class="pojo.worldCountryEntity"/>
+        <mapping class="pojo.worldCountrylanguageEntity"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

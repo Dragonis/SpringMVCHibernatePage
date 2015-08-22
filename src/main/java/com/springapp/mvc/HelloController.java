@@ -1,5 +1,8 @@
 package com.springapp.mvc;
 
+import com.springapp.mvc.model.Person;
+import com.springapp.mvc.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("/")
 public class HelloController {
+
+	@Autowired
+	PersonService personService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
+		String talk = this.personService.talk(new Person("", ""));
+		model.addAttribute("message", talk);
 		return "hello";
 	}
 
