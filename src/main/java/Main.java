@@ -1,7 +1,11 @@
+import com.springapp.mvc.model.Car;
+import com.springapp.mvc.model.Motorbike;
+import com.springapp.mvc.model.Refuelable;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import pojo.worldCountryEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +29,7 @@ public class Main {
 //
 //
 //            }
+
             final Query query1 = session.createQuery("from worldCountryEntity ");
             List list1 = query1.list();
             for (Object aList1 : list1) {
@@ -32,8 +37,21 @@ public class Main {
                 System.out.println(world.getName());
             }
 //            session.save(new worldCountryEntity().setName("WojtekS"););
+
+            zatankujPojazdyJezdzaceNaPaliwie();
+
         } finally {
             session.close();
+        }
+    }
+
+    private static void zatankujPojazdyJezdzaceNaPaliwie() {
+        List<Refuelable> vehicles = new ArrayList<Refuelable>();
+        vehicles.add(new Car());
+        vehicles.add(new Motorbike());
+        for(Refuelable vehicle : vehicles)
+        {
+            System.out.println(vehicle.refuel());
         }
     }
 }

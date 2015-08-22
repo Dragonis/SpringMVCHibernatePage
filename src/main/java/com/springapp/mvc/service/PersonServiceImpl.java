@@ -2,6 +2,7 @@ package com.springapp.mvc.service;
 
 import com.springapp.mvc.model.Person;
 import com.springapp.mvc.repository.PersonRepository;
+import com.springapp.mvc.repository.hibernate.HibernatePersonRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +25,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public String talk(Person person) {
-        return "Jakas gadka";
+        HibernatePersonRepositoryImpl hibernatePersonRepository = new HibernatePersonRepositoryImpl();
+        Person personById = hibernatePersonRepository.findById(0);
+        String personFirstandLastName = personById.getFirstName() + " " + personById.getLastName();
+        return personFirstandLastName;
     }
 
     @Override

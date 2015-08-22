@@ -1,6 +1,5 @@
 package com.springapp.mvc;
 
-import com.springapp.mvc.model.Person;
 import com.springapp.mvc.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +22,8 @@ public class HelloController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		String talk = this.personService.talk(new Person("", ""));
-		model.addAttribute("message", talk);
+//		String talk = this.personService.talk(new Person("", ""));
+		model.addAttribute("message", "Hello world!");
 		return "hello";
 	}
 
